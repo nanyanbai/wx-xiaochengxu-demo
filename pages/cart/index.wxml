@@ -1,0 +1,26 @@
+<view class="cart_container">
+    <!-- 收货地址 -->
+    <view class="revice_address_row">
+        <!-- 当收货地址不存在的时候  按钮显示   {{address.userName}} ---(表示存在) {{!address.userName}} --(加了感叹号表示取反，不存在了)-->
+        <view class="address_btn" wx:if="{{!address.userName}}"  >
+            <button bindtap="handleChooseAddress" type="primary" plain>获取收货地址</button>
+        </view>
+        <!-- 当收货地址存在的时候，显示详细收货地址 -->
+        <view wx:else  class="user_info_row" >
+            <view class="user_info">
+                <view>{{address.userName}}</view>
+                <view>{{address.telNumber}}</view>
+            </view>
+            <view class="user_phone">{{address.all}}</view>
+        </view>
+    </view>
+
+    <!-- 购物车内容 start -->
+    <view class="cart_content"></view>
+    <!-- 购物车内容 end -->
+
+    <!-- 底部工具栏 start -->
+    <view class="footer_tool"></view>
+    <!-- 底部工具栏 end -->
+
+</view>
