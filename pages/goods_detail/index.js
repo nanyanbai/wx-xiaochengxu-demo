@@ -54,7 +54,29 @@ Page({
 
   // 点击 加入购物车
   handleCartAdd () {
-
+    // 获取缓存中的购物车  数组
+    let cart = wx.getStorageSync("cart") || [];
+    // 判断 商品对象是否存在于购物车数组中
+    let index = cart.findIndex(item => {
+      return item.goods_id === this.GoodsInfo.goods_id
+    })
+    if (index === -1) {
+      // 不存在 第一次添加
+      this.GoodsInfo.num = 1;
+      this.GoodsInfo.checked = true;
+      cart.push(this.GoodsInfo);
+    } else  {
+      // 已存在购物车
+      cart[index].num++;
+    }
+    // 把购物车重新添加回缓存中
+    wx.setStorageSync("cart", cart);
+    wx.showToast({
+      title: '加入成功',
+      icon: 'success',
+      // true 防止用户 手抖 疯狂点击按钮 
+      mask: true
+    });
   },
 
   // 点击 商品收藏图标

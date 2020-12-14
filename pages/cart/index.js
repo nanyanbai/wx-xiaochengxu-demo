@@ -6,14 +6,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    address: {}
+    address: {},
+    cart: [],
+    allChecked: false
   },
 
   onShow () {
     // 获取缓存中的收货地址
     const address = wx.getStorageSync("address");
-    
-    this.setData({ address });
+    // 获取缓存中的购物车的数据
+    const cart = wx.getStorageSync("cart") || [];
+    // 计算全选
+    const allChecked = cart.length? cart.every(v=>v.checked) : false
+    this.setData({ address, cart, allChecked });
   },
 
   /**
@@ -47,4 +52,6 @@ Page({
  *  2 页面加载完毕
  *    1.获取本地存储中的地址数据
  *    2. 把数据 设置给data中的一个变量 
+ * 
+ * 3 
  */
